@@ -46,9 +46,9 @@ public class BooksAdapter extends ArrayAdapter<Book> {
             LayoutInflater inflater = (LayoutInflater)getContext()
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.book_item, parent, false);
-            viewHolder.bookCover = (ImageView)convertView.findViewById(R.id.bookCover);
-            viewHolder.bookTitle = (TextView)convertView.findViewById(R.id.bookTitle);
-            viewHolder.bookAuthor = (TextView)convertView.findViewById(R.id.bookAuthor);
+            viewHolder.bookCover = (ImageView)convertView.findViewById(R.id.book_cover);
+            viewHolder.bookTitle = (TextView)convertView.findViewById(R.id.book_title);
+            viewHolder.bookAuthor = (TextView)convertView.findViewById(R.id.book_author);
             convertView.setTag(viewHolder);
         }else{
             viewHolder = (ViewHolder) convertView.getTag();

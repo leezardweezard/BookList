@@ -2,17 +2,16 @@ package com.example.android.booklist;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.util.Log;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
 
 import com.example.android.booklist.Adapter.BooksAdapter;
@@ -20,8 +19,10 @@ import com.example.android.booklist.Models.Book;
 import com.example.android.booklist.Service.OpenBookService;
 import com.example.android.booklist.Service.RetrofitService;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
-import java.util.List;
 
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity
 
     private ListView booksListView;
     private BooksAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,55 +41,42 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        booksListView = (ListView)findViewById(R.id.booksListView);
+        booksListView = (ListView) findViewById(R.id.book_list_view);
         ArrayList<Book> booksList = new ArrayList<Book>();
         Book book1 = new Book();
-        book1.setTitle("FUCK");
-        book1.setAuthor("YOU");
+        book1.setTitle(getString(R.string.sample_title));
+        book1.setAuthor(getString(R.string.sample_author));
         Book book2 = new Book();
         book2.setTitle("COME");
         book2.setAuthor("AT ME");
         booksList.add(book1);
         booksList.add(book2);
-        adapter = new BooksAdapter(this,booksList);
+        adapter = new BooksAdapter(this, booksList);
         booksListView.setAdapter(adapter);
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         FloatingActionButton addBookFloatingButton = (FloatingActionButton) findViewById(R.id.fab);
         addBookFloatingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                OpenBookService bookService = RetrofitService.createRetrofitService(OpenBookService.class,OpenBookService.SERVICE_ENDPOINT);
+                OpenBookService bookService = RetrofitService.createRetrofitService(OpenBookService.class, OpenBookService.SERVICE_ENDPOINT);
                 String author = "Dickens";
                 bookService.getBook(author).subscribeOn(Schedulers.newThread())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new Subscriber<Book>() {
                             @Override
                             public void onCompleted() {
-                                Log.d("finish","complet3ed!");
+                                Log.d("finish", "complet3ed!");
                             }
 
                             @Override
                             public void onError(Throwable e) {
-                                Log.d("error","an error has occured"+e);
+                                Log.d("error", "an error has occured" + e);
                             }
 
                             @Override
-                            public void onNext(Book response) {
-                                Log.d("result","respones "+response.getBookAuthor());
+                            public void onNext(Book book) {
+                                    Log.d("result", "respones " + book);
                             }
                         });
             }

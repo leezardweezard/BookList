@@ -5,7 +5,7 @@
     android:orientation="horizontal">
 
     <ImageView
-        android:id="@+id/bookCover"
+        android:id="@+id/book_cover"
         android:layout_width="0dp"
         android:layout_height="70dp"
         android:layout_margin="6dp"
@@ -13,19 +13,19 @@
         />
     <LinearLayout
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="150dp"
         android:orientation="vertical"
         android:layout_weight="4">
         <TextView
-            android:id="@+id/bookTitle"
-            android:layout_width="wrap_content"
+            android:id="@+id/book_title"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="6dp"
             android:text="@string/sample_title"
             android:textSize="24sp"/>
         <TextView
-            android:id="@+id/bookAuthor"
-            android:layout_width="wrap_content"
+            android:id="@+id/book_author"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="6dp"
             android:text="@string/sample_author"
@@ -34,7 +34,7 @@
     </LinearLayout>
 
     <ImageButton
-        android:id="@+id/addToListButton"
+        android:id="@+id/add_to_list_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
